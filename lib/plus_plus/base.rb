@@ -66,11 +66,11 @@ module PlusPlus
     raise 'No :plus option specified' if options[:plus].nil?
     raise 'No :minus option specified' if options[:minus].nil?
 
-    return unless changes.include?(options[:changed])
+    return unless previous_changes.include?(options[:changed])
 
     # Create a 'snapshot' of what the model did look like
     dup = self.dup
-    changes.each { |k, v| dup[k] = v.first }
+    previous_changes.each { |k, v| dup[k] = v.first }
 
     prev_satisfied_for_minus = plus_plus_satisfied_for?(dup,
                                                         options[:minus],
